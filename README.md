@@ -1,17 +1,17 @@
 simplecov-coverboard
 =====================
-
+Helpling Hackathon project
 :beer: :pizza: :banana: :monkey:
 
 ## What?
-*simpleCov-coverboard* is a SimpleCov::Formatter which sends your code coverage metrics. 
-Based on the metrics you can see a de
+*simplecov-coverboard* is a SimpleCov::Formatter which sends your code coverage metrics. 
+You can see the metrics on the CoverBoard project dashboard.
 
 ## How to install
 ### Add required gems to your Gemfile
 ```
 gem 'simplecov' 
-gem 'simplecov-coverboard', git: https://github.com/lautaro-mazzitelli-helpling/simplecov-coverboard
+gem 'simplecov-coverboard', git: https://github.com/coverboard/simplecov-coverboard
 ```
 ### Configure your project
 Create a file which will contain the uid of your project: .coverboard.yml
@@ -21,14 +21,18 @@ coverboard:
   uid: 'demo'
 ```
 
-Set up your the default Simplecov formater
+Set the default SimpleCov formatter
 
 ```
 SimpleCov.formatter = SimpleCov::Formatter::CoverBoardFormatter
 ```
 
 ### Check the charts
-https://aqueous-forest-2696.herokuapp.com/?project=demo
+After running your tests check the charts https://aqueous-forest-2696.herokuapp.com/?project=demo
+
+## Contribution
+- fork the repository
+- create a PR 
 
 ## About the author
 * [Lautaro](https://www.github.com/lautaro-mazzitelli-helpling)
