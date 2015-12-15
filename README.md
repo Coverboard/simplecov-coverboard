@@ -3,6 +3,8 @@ simplecov-coverboard
 Helpling Hackathon project
 :beer: :pizza: :banana: :monkey:
 
+[![Build Status](https://travis-ci.org/Coverboard/simplecov-coverboard.svg)](https://travis-ci.org/Coverboard/simplecov-coverboard)
+
 ## What?
 *simplecov-coverboard* is a SimpleCov::Formatter which sends your code coverage metrics. 
 You can see the metrics on the CoverBoard project dashboard.
