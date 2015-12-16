@@ -51,9 +51,7 @@ module SimpleCov
 
         def send_to_api msg
           connector = Connector.new
-          connector.payload = msg
-          connector.post
-          puts connector.response
+          puts connector.post msg
         end
 
       private

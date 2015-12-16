@@ -6,6 +6,7 @@ module CoverBoard
 
     @@config = nil
 
+    HTTPS = true
     HOST = 'aqueous-forest-2696.herokuapp.com'
     PORT = 80
     ENDPOINT = '/api/metrics'
@@ -32,6 +33,14 @@ module CoverBoard
 
     def self.endpoint
       from_yml 'endpoint', ENDPOINT
+    end
+
+    def self.verbose
+      from_yml 'verbose', false
+    end
+
+    def self.https
+      from_yml 'https', HTTPS
     end
 
     private
