@@ -1,23 +1,36 @@
 require 'net/http'
 
 class Connector
-
-  attr_accessor :payload, :endpoint, :response, :user, :pass, :host, :port, :auth_enabled
-
-  def post
-    req = Net::HTTP::Post.new(CoverBoard::Config.endpoint, initheader = {'Content-Type' =>'application/json'})
+  def post(payload)
+    uri = build_uri
+    req = Net::HTTP::Post.new(uri)
+    req.content_type = 'application/json'
+    req.body = payload
 
     if CoverBoard::Config.user && CoverBoard::Config.password
       req.basic_auth CoverBoard::Config.user, CoverBoard::Config.password
     end
 
-    req.body = @payload
+    if CoverBoard::Config.verbose
+      puts "Pushing to #{uri}"
+      puts "Application id #{CoverBoard::Config.uid}"
+      puts "Payload #{payload}"
+    end
 
-    puts "Pushing to #{CoverBoard::Config.host}:#{CoverBoard::Config.port}#{CoverBoard::Config.endpoint}"
-    puts "Application id #{CoverBoard::Config.uid}"
-    puts "Payload #{@payload}"
-    response = Net::HTTP.new(CoverBoard::Config.host, CoverBoard::Config.port).start {|http| http.request(req) }
-    @response =  "Response #{response.code} #{response.message}: #{response.body}"
+    response = Net::HTTP.new(uri.hostname, uri.port).start {|http| http.request(req) }
+
+    if CoverBoard::Config.verbose
+      puts "Response #{response.code} #{response.message}: #{response.body}"
+    end
+
+    response
   end
 
+  private
+    def build_uri
+      uri = 'http'
+      uri += 's' if CoverBoard::Config.https
+
+      URI("#{uri}://#{CoverBoard::Config.host}:#{CoverBoard::Config.port}#{CoverBoard::Config.endpoint}")
+    end
 end
